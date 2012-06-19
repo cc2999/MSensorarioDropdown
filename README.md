@@ -12,8 +12,6 @@ Move in your /protected/modules folder and clone the repository on your project:
 
 And add it into your module list
 
-::
-
     'modules' => array(
         ...
         'MSensorarioDropdown',
@@ -27,8 +25,6 @@ Usage
 
 Schema
 ======
-
-::
 
     CREATE TABLE IF NOT EXISTS `comune` (
         `id` int(11) NOT NULL AUTO_INCREMENT,
