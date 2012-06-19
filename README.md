@@ -6,7 +6,7 @@ A module to build dependents dropdown
 Install
 =======
 
-Clone the repository on your project:
+Move in your /protected/modules folder and clone the repository on your project:
 
     $ git clone git@github.com:sensorario/MSensorarioDropdown
 
