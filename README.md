@@ -57,3 +57,24 @@ Schema
         ADD CONSTRAINT `regione_ibfk_1` 
         FOREIGN KEY (`stato_id`) 
         REFERENCES `stato` (`id`);
+
+Dati di esempio
+===============
+
+    INSERT INTO `comune` (`id`, `nome`, `regione_id`) VALUES
+        (1, 'Cesena', 1),
+        (2, 'Bologna', 1),
+        (3, 'Parma', 1);
+
+    INSERT INTO `regione` (`id`, `nome`, `stato_id`) VALUES
+        (1, 'Emilia-Romagna', 1),
+        (2, 'Molise', 1),
+        (3, 'Lazio', 1);
+
+    INSERT INTO `stato` (`id`, `nome`) VALUES
+        (1, 'Italia'),
+        (2, 'Francia'),
+        (3, 'Germania'),
+        (4, 'Spagna'),
+        (5, 'Inghilterrra'),
+        (6, 'Svezia');
