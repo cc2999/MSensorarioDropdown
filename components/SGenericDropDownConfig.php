@@ -1,6 +1,6 @@
 <?php
 
-class SensorarioGenericDropDownConfig
+class SGenericDropDownConfig
 {
     public static function CenterConfig($model)
     {

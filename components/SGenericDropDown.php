@@ -13,7 +13,7 @@
   'id' => 'regioni',
   ))
  */
-class SensorarioGenericDropDown
+class SGenericDropDown
 {
     public static function create($params = array())
     {
@@ -35,7 +35,7 @@ class SensorarioGenericDropDown
         if (count($params['model']) === 0) {
             echo $params['error_message'];
         } else {
-            SensorarioGenericDropDown::create($params);
+            SGenericDropDown::create($params);
         }
     }
 
