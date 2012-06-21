@@ -49,6 +49,16 @@ here the content:
         ),
     );
 
+The widget use these vars generating this html. The most important thing to
+change is *model* and *message*. Message will appear when there are no *city*
+once selected a *state*. Or there are no *state once selected a *country*.
+
+    <div  class="box">
+        <span id="' . $this->config['Country']['id'] . '"></span>
+        <span id="' . $this->config['State']['id'] . '"></span>
+        <span id="' . $this->config['City']['id'] . '"></span>
+    </div>';
+
 Usage
 =====
 
