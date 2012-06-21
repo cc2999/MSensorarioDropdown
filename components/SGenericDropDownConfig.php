@@ -21,10 +21,7 @@ class SGenericDropDownConfig
             'model' => $model,
             'error_message' => 'Questa regione non ha comuni',
             'name' => 'Comuni',
-            'select' => -1,
-            'htmlOptions' => array(
-                'onchange' => 'console.log("Comune: " + this.value);'
-            )
+            'select' => -1
         );
     }
 

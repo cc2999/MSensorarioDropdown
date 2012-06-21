@@ -17,6 +17,8 @@ class SGenericDropDown
 {
     public static function create($params = array())
     {
+        $params['htmlOptions'] = array();
+        
         if (isset($params['action'])) {
             $params['htmlOptions'] = array('onchange' => '
             $.ajax({
