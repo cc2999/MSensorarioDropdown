@@ -2,10 +2,6 @@
 
 class DefaultController extends Controller
 {
-    public function actionIndex()
-    {
-        $this->render('index');
-    }
 
     public function actionCountry($country, $state, $city)
     {

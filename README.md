@@ -58,8 +58,8 @@ Schema
         FOREIGN KEY (`stato_id`) 
         REFERENCES `stato` (`id`);
 
-Dati di esempio
-===============
+Sample data
+===========
 
     INSERT INTO `comune` (`id`, `nome`, `regione_id`) VALUES
         (1, 'Cesena', 1),
