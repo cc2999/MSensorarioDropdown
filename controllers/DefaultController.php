@@ -7,23 +7,21 @@ class DefaultController extends Controller
         $this->render('index');
     }
 
-    public function actionStati()
+    public function actionCountry()
     {
-        $config = SGenericDropDownConfig::LeftConfig();
+        $config = SGenericDropDownConfig::Country();
         SGenericDropDown::create($config);
     }
 
-    public function actionRegioni($stato_id)
+    public function actionState($fk)
     {
-        $model = Regione::getRegione($stato_id);
-        $config = SGenericDropDownConfig::CenterConfig($model);
+        $config = SGenericDropDownConfig::State($fk);
         SGenericDropDown::createDinamic($config);
     }
 
-    public function actionComuni($regione_id)
+    public function actionCity($fk)
     {
-        $model = Comune::getComune($regione_id);
-        $config = SGenericDropDownConfig::RightConfig($model);
+        $config = SGenericDropDownConfig::City($fk);
         SGenericDropDown::createDinamic($config);
     }
 

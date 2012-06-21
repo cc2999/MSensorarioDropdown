@@ -22,7 +22,7 @@ class SGenericDropDown
         if (isset($params['action'])) {
             $params['htmlOptions'] = array('onchange' => '
             $.ajax({
-                url: "' . (Yii::app()->createUrl('MSensorarioDropdown/default/' . $params['action'])) . '/' . $params['fk'] . '/"+this.value,
+                url: "' . (Yii::app()->createUrl('MSensorarioDropdown/default/' . $params['action'])) . '/fk/"+this.value,
                 success: function (data) {
                     $("#' . $params['id'] . '").html(data);
                 }

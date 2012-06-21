@@ -6,7 +6,7 @@ class ESensorarioDropdown extends CWidget
     {
         parent::init();
         Yii::app()->getClientScript()->registerScript('drop', '$.ajax({
-            url: "' . (Yii::app()->createUrl('MSensorarioDropdown/default/stati')) . '",
+            url: "' . (Yii::app()->createUrl('MSensorarioDropdown/default/country')) . '",
             success: function (data) {
                 $("#stati").html(data);
             }
