@@ -23,7 +23,7 @@ Configure
 
 To configure this module, you need to update this config file:
 
-    /protected/modules/MSensorarioDropdown/confih/maing.php
+    /protected/modules/MSensorarioDropdown/config/maing.php
 
 here the content:
 
