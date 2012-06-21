@@ -3,10 +3,22 @@ MSensorarioDropdown
 
 A module to build dependents dropdown
 
+Requirement
+===========
+
+Be shure to have 'urlFormat'=>'path' enabled in your config file
+
+    'components'=>array(
+        'urlManager'=>array(
+            'urlFormat'=>'path',
+        ),
+    ),
+
 Install
 =======
 
-Move in your /protected/modules folder and clone the repository on your project:
+Move in your /protected/modules folder. If not exists, create it. And now clone 
+the repository on your project:
 
     $ git clone git@github.com:sensorario/MSensorarioDropdown
 
