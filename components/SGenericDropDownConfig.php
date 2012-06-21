@@ -5,11 +5,20 @@
  */
 class SGenericDropDownConfig
 {
-    public static function Country($state)
+    public static function getConfig()
     {
+        return require dirname(__FILE__) . '/../config/main.php';
+    }
+
+    public static function Country($state, $model = array())
+    {
+        $config = SGenericDropDownConfig::getConfig();
+
+        eval('$model = ' . $config['Country']['model']);
+
         return array(
-            'name' => 'Stati',
-            'model' => Stato::getStati(),
+            'name' => $config['Country']['name'],
+            'model' => $model,
             /* Do not alter this items */
             'select' => null,
             'action' => 'state',
@@ -17,12 +26,16 @@ class SGenericDropDownConfig
         );
     }
 
-    public static function State($id, $city)
+    public static function State($id = null, $city = 'city', $model = array())
     {
+        $config = SGenericDropDownConfig::getConfig();
+
+        eval('$model = ' . $config['State']['model']);
+
         return array(
-            'name' => 'Regioni',
-            'model' => Regione::getRegione($id),
-            'error_message' => 'Questo stato non ha regioni',
+            'name' => $config['State']['name'],
+            'model' => $model,
+            'error_message' => $config['State']['message'],
             /* Do not alter this items */
             'select' => -1,
             'action' => 'city',
@@ -30,12 +43,16 @@ class SGenericDropDownConfig
         );
     }
 
-    public static function City($id)
+    public static function City($id = null, $model = array())
     {
+        $config = SGenericDropDownConfig::getConfig();
+
+        eval('$model = ' . $config['City']['model']);
+
         return array(
-            'name' => 'Comuni',
-            'model' => Comune::getComune($id),
-            'error_message' => 'Questa regione non ha comuni',
+            'name' => $config['City']['name'],
+            'model' => $model,
+            'error_message' => $config['City']['message'],
             /* Do not alter this items */
             'select' => -1,
         );

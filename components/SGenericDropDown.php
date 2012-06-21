@@ -1,18 +1,5 @@
 <?php
 
-/**
- * This component permit to create a dropDownList with an array as
- * configuration.
- * 
- * SensorarioGenericDropDown::create(array(
-  'name' => 'Stati',
-  'select' => null,
-  'data' => Stato::getStati(),
-  'action' => 'regioni',
-  'fk' => 'stato_id',
-  'id' => 'regioni',
-  ))
- */
 class SGenericDropDown
 {
     public static function create($country, $state, $city, $params = array())
@@ -39,7 +26,7 @@ class SGenericDropDown
 
     public static function createDinamic($country, $state, $city, $params = array())
     {
-        if (count($params['model']) === 0) {
+        if (count($params['model']) === 1) {
             echo $params['error_message'];
         } else {
             SGenericDropDown::create($country, $state, $city, $params);

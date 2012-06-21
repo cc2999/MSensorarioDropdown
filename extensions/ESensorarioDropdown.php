@@ -2,21 +2,27 @@
 
 class ESensorarioDropdown extends CWidget
 {
-    public $country = 'stati';
-    public $state = 'regioni';
-    public $city = 'comuni';
+    private $config;
 
+    public static function getConfig()
+    {
+        return require dirname(__FILE__) . '/../config/main.php';
+    }
+    
     public function init()
     {
         parent::init();
+
+        $this->config = ESensorarioDropdown::getConfig();
+
         Yii::app()->getClientScript()->registerScript('drop', '$.ajax({
             url: "' . (Yii::app()->createUrl('MSensorarioDropdown/default/country', array(
-                    'country' => $this->country,
-                    'state' => $this->state,
-                    'city' => $this->city,
+                    'country' => $this->config['Country']['id'],
+                    'state' => $this->config['State']['id'],
+                    'city' => $this->config['City']['id'],
                 ))) . '",
             success: function (data) {
-                $("#' . $this->country . '").html(data);
+                $("#' . $this->config['Country']['id'] . '").html(data);
             }
         })');
     }
@@ -26,9 +32,9 @@ class ESensorarioDropdown extends CWidget
         parent::run();
         echo '
         <div  class="box">
-            <span id="' . $this->country . '"></span>
-            <span id="' . $this->state . '"></span>
-            <span id="' . $this->city . '"></span>
+            <span id="' . $this->config['Country']['id'] . '"></span>
+            <span id="' . $this->config['State']['id'] . '"></span>
+            <span id="' . $this->config['City']['id'] . '"></span>
         </div>';
     }
 
