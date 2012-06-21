@@ -9,13 +9,13 @@ class DefaultController extends Controller
 
     public function actionStati()
     {
-        echo CHtml::dropDownList('Stati', null, Stato::getStati(), array(
-            'onchange' => '$.ajax({
-                url: "' . (Yii::app()->createUrl('MSensorarioDropdown/default/regioni')) . '/stato_id/"+this.value,
-                success: function (data) {
-                    $("#regioni").html(data);
-                }
-            })'
+        echo SensorarioGenericDropDown::create(array(
+            'name' => 'Stati',
+            'select' => null,
+            'data' => Stato::getStati(),
+            'action' => 'regioni',
+            'fk' => 'stato_id',
+            'id' => 'regioni',
         ));
     }
 
@@ -25,13 +25,13 @@ class DefaultController extends Controller
         if (count($regioni) === 0) {
             echo 'Questo stato non ha regioni';
         } else {
-            echo CHtml::dropDownList('Regioni', -1, $regioni, array(
-                'onchange' => '$.ajax({
-                    url: "' . (Yii::app()->createUrl('MSensorarioDropdown/default/comuni')) . '/regione_id/"+this.value,
-                    success: function (data) {
-                        $("#comuni").html(data);
-                    }
-                })'
+            echo SensorarioGenericDropDown::create(array(
+                'name' => 'Regioni',
+                'select' => -1,
+                'data' => $regioni,
+                'action' => 'comuni',
+                'fk' => 'regione_id',
+                'id' => 'comuni',
             ));
         }
     }
