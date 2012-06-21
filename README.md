@@ -18,13 +18,44 @@ And add it into your module list
         ...
     ),
 
+Configure
+=========
+
+To configure this module, you need to update this config file:
+
+    /protected/modules/MSensorarioDropdown/confih/maing.php
+
+here the content:
+
+    <?php
+
+    return array(
+        'Country' => array(
+            'id' => 'stati',
+            'name' => 'Stati',
+            'model' => 'Stato::getStati();',
+        ),
+        'State' => array(
+            'id' => 'regioni',
+            'name' => 'Regioni',
+            'model' => 'Regione::getRegione($id);',
+            'message' => 'Questa regione non ha comuni',
+        ),
+        'City' => array(
+            'id' => 'comuni',
+            'name' => 'Comuni',
+            'model' => 'Comune::getComune($id);',
+            'message' => 'Questa regione non ha comuni',
+        ),
+    );
+
 Usage
 =====
 
 <?php $this->widget('MSensorarioDropdown.extensions.ESensorarioDropdown'); ?>
 
-Schema
-======
+Sample Schema
+=============
 
     CREATE TABLE IF NOT EXISTS `comune` (
         `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -61,16 +92,6 @@ Schema
 Sample data
 ===========
 
-    INSERT INTO `comune` (`id`, `nome`, `regione_id`) VALUES
-        (1, 'Cesena', 1),
-        (2, 'Bologna', 1),
-        (3, 'Parma', 1);
-
-    INSERT INTO `regione` (`id`, `nome`, `stato_id`) VALUES
-        (1, 'Emilia-Romagna', 1),
-        (2, 'Molise', 1),
-        (3, 'Lazio', 1);
-
     INSERT INTO `stato` (`id`, `nome`) VALUES
         (1, 'Italia'),
         (2, 'Francia'),
@@ -78,3 +99,13 @@ Sample data
         (4, 'Spagna'),
         (5, 'Inghilterrra'),
         (6, 'Svezia');
+
+    INSERT INTO `regione` (`id`, `nome`, `stato_id`) VALUES
+        (1, 'Emilia-Romagna', 1),
+        (2, 'Molise', 1),
+        (3, 'Lazio', 1);
+
+    INSERT INTO `comune` (`id`, `nome`, `regione_id`) VALUES
+        (1, 'Cesena', 1),
+        (2, 'Bologna', 1),
+        (3, 'Parma', 1);
