@@ -5,36 +5,39 @@
  */
 class SGenericDropDownConfig
 {
-    public static function Country()
+    public static function Country($state)
     {
         return array(
             'name' => 'Stati',
-            'select' => null,
             'model' => Stato::getStati(),
+            /* Do not alter this items */
+            'select' => null,
             'action' => 'state',
-            'id' => 'regioni',
+            'id' => $state,
         );
     }
 
-    public static function State($id)
+    public static function State($id, $city)
     {
         return array(
+            'name' => 'Regioni',
             'model' => Regione::getRegione($id),
             'error_message' => 'Questo stato non ha regioni',
-            'name' => 'Regioni',
+            /* Do not alter this items */
             'select' => -1,
             'action' => 'city',
-            'id' => 'comuni',
+            'id' => $city,
         );
     }
 
     public static function City($id)
     {
         return array(
+            'name' => 'Comuni',
             'model' => Comune::getComune($id),
             'error_message' => 'Questa regione non ha comuni',
-            'name' => 'Comuni',
-            'select' => -1
+            /* Do not alter this items */
+            'select' => -1,
         );
     }
 

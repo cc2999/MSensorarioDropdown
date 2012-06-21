@@ -7,22 +7,22 @@ class DefaultController extends Controller
         $this->render('index');
     }
 
-    public function actionCountry()
+    public function actionCountry($country, $state, $city)
     {
-        $config = SGenericDropDownConfig::Country();
-        SGenericDropDown::create($config);
+        $config = SGenericDropDownConfig::Country($state);
+        SGenericDropDown::create($country, $state, $city, $config);
     }
 
-    public function actionState($fk)
+    public function actionState($country, $state, $city, $fk)
     {
-        $config = SGenericDropDownConfig::State($fk);
-        SGenericDropDown::createDinamic($config);
+        $config = SGenericDropDownConfig::State($fk, $city);
+        SGenericDropDown::createDinamic($country, $state, $city, $config);
     }
 
-    public function actionCity($fk)
+    public function actionCity($country, $state, $city, $fk)
     {
         $config = SGenericDropDownConfig::City($fk);
-        SGenericDropDown::createDinamic($config);
+        SGenericDropDown::createDinamic($country, $state, $city, $config);
     }
 
 }
