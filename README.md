@@ -133,7 +133,7 @@ Sample data
         (3, 'Parma', 1);
 
 	
-+## 1.1 (Jun 23, 2012)
+## 1.1 (Jun 23, 2012)
 
 Bugfixes:
     #1 Enable also non "path" style url
