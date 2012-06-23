@@ -7,14 +7,20 @@ class SGenericDropDown
         $params['htmlOptions'] = array();
 
         if (isset($params['action'])) {
+
             $url = (Yii::app()->createUrl('MSensorarioDropdown/default/' . $params['action'], array(
                         'country' => $country,
                         'state' => $state,
                         'city' => $city,
                     )));
+
+            $fk = Yii::app()->getUrlManager()->getUrlFormat() === 'path' ?
+                    '/fk/' :
+                    '&fk=';
+
             $params['htmlOptions'] = array('onchange' => '
                 $.ajax({
-                    url: "' . $url . '/fk/"+this.value,
+                    url: "' . $url . $fk . '"+this.value,
                     success: function (data) {
                         $("#' . $params['id'] . '").html(data);
                     }
