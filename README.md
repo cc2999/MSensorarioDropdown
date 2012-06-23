@@ -131,3 +131,9 @@ Sample data
         (1, 'Cesena', 1),
         (2, 'Bologna', 1),
         (3, 'Parma', 1);
+
+	
++## 1.1 (Jun 23, 2012)
+
+Bugfixes:
+    #1 Enable also non "path" style url
