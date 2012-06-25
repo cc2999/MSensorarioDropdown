@@ -4,10 +4,9 @@ require dirname(__FILE__) . '/../helpers/ESConfig.php';
 
 class SGenericDropDownConfig extends ESConfig
 {
-    
-    public static function Country($state, $model = array())
+    public static function Country($state, $model = array(), $configuration)
     {
-        $config = SGenericDropDownConfig::getConfig();
+        $config = SGenericDropDownConfig::getConfig($configuration);
 
         eval('$model = ' . $config['Country']['model']);
 
@@ -21,9 +20,9 @@ class SGenericDropDownConfig extends ESConfig
         );
     }
 
-    public static function State($id = null, $city = 'city', $model = array())
+    public static function State($id = null, $city = 'city', $model = array(), $configuration)
     {
-        $config = SGenericDropDownConfig::getConfig();
+        $config = SGenericDropDownConfig::getConfig($configuration);
 
         eval('$model = ' . $config['State']['model']);
 
@@ -38,9 +37,9 @@ class SGenericDropDownConfig extends ESConfig
         );
     }
 
-    public static function City($id = null, $model = array())
+    public static function City($id = null, $model = array(), $configuration)
     {
-        $config = SGenericDropDownConfig::getConfig();
+        $config = SGenericDropDownConfig::getConfig($configuration);
 
         eval('$model = ' . $config['City']['model']);
 

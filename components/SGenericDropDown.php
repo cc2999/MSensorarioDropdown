@@ -2,7 +2,7 @@
 
 class SGenericDropDown
 {
-    public static function create($country, $state, $city, $params = array())
+    public static function create($country, $state, $city, $params = array(), $configuration)
     {
         $params['htmlOptions'] = array();
 
@@ -12,6 +12,7 @@ class SGenericDropDown
                         'country' => $country,
                         'state' => $state,
                         'city' => $city,
+                        'configuration' => $configuration,
                     )));
 
             $fk = Yii::app()->getUrlManager()->getUrlFormat() === 'path' ?
@@ -30,12 +31,12 @@ class SGenericDropDown
         echo CHtml::dropDownList($params['name'], $params['select'], $params['model'], $params['htmlOptions']);
     }
 
-    public static function createDinamic($country, $state, $city, $params = array())
+    public static function createDinamic($country, $state, $city, $params = array(), $configuration)
     {
         if (count($params['model']) === 1) {
             echo $params['error_message'];
         } else {
-            SGenericDropDown::create($country, $state, $city, $params);
+            SGenericDropDown::create($country, $state, $city, $params, $configuration);
         }
     }
 

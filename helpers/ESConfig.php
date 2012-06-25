@@ -2,10 +2,15 @@
 
 class ESConfig extends CWidget
 {
-    public static function getConfig()
+    public static function getConfig($configuration = null)
     {
         $config = require dirname(__FILE__) . '/../config/main.php';
-        return $config['configurations'][$config['defaultConfiguration']];
+        
+        $configuraionName = trim($configuration) === "" ?
+                $config['defaultConfiguration'] :
+                $configuration;
+        
+        return $config['configurations'][$configuraionName];
     }
 
 }

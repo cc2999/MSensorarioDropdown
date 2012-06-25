@@ -74,6 +74,14 @@ once selected a *state*. Or there are no *state once selected a *country*.
 Usage
 =====
 
+## from (??, 2012)
+
+    $this->widget('MSensorarioDropdown.extensions.ESensorarioDropdown', array(
+        'configOption' => 'default'
+    ));
+
+## from 1.1 (Jun 23, 2012)
+
     <?php $this->widget('MSensorarioDropdown.extensions.ESensorarioDropdown'); ?>
 
 Sample Schema
