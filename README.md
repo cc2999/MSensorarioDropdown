@@ -143,6 +143,9 @@ Sample data
 	
 ## 1.2 (Jun 23, 2012)
 
+Bugfixes:
+    #5 Changing Country, city is not resetted
+
 Enhancement:
     #2 Dynamic models
 
