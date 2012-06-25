@@ -1,15 +1,10 @@
 <?php
 
-/**
- * Country -> State -> City 
- */
-class SGenericDropDownConfig
-{
-    public static function getConfig()
-    {
-        return require dirname(__FILE__) . '/../config/main.php';
-    }
+require dirname(__FILE__) . '/../helpers/ESConfig.php';
 
+class SGenericDropDownConfig extends ESConfig
+{
+    
     public static function Country($state, $model = array())
     {
         $config = SGenericDropDownConfig::getConfig();

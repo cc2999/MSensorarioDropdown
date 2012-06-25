@@ -1,14 +1,11 @@
 <?php
 
-class ESensorarioDropdown extends CWidget
+require dirname(__FILE__) . '/../helpers/ESConfig.php';
+
+class ESensorarioDropdown extends ESConfig
 {
     private $config;
 
-    public static function getConfig()
-    {
-        return require dirname(__FILE__) . '/../config/main.php';
-    }
-    
     public function init()
     {
         parent::init();
