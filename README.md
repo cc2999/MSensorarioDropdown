@@ -74,7 +74,7 @@ once selected a *state*. Or there are no *state once selected a *country*.
 Usage
 =====
 
-## from (??, 2012)
+## from (Jun 25, 2012)
 
     $this->widget('MSensorarioDropdown.extensions.ESensorarioDropdown', array(
         'configOption' => 'default'
@@ -141,6 +141,11 @@ Sample data
         (3, 'Parma', 1);
 
 	
+## 1.2 (Jun 23, 2012)
+
+Enhancement:
+    #2 Dynamic models
+
 ## 1.1 (Jun 23, 2012)
 
 Bugfixes:
