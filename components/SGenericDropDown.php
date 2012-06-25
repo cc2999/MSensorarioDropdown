@@ -20,6 +20,7 @@ class SGenericDropDown
                     '&fk=';
 
             $params['htmlOptions'] = array('onchange' => '
+                $("#' . $city . '").html("");
                 $.ajax({
                     url: "' . $url . $fk . '"+this.value,
                     success: function (data) {
