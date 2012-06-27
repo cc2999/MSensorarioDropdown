@@ -26,13 +26,25 @@ class ESensorarioDropdown extends ESConfig
         })');
     }
 
-    public function run()
+    private function plusButton($dialogId, $visible = false)
     {
-        parent::run();
+        $this->addDialog($dialogId);
 
-        /* Modal window */
+        return '
+            <span id="country-plus-box" style="visibility: '.($visible === true ? 'visible' : 'hidden').';">
+                <span id="country-plus"> [' .
+                    CHtml::link('+', '#', array(
+                        'onclick' => '$("#country-dialog").dialog("open"); 
+                                    return false;',
+                    )) . ']
+                </span>
+            </span>';
+    }
+
+    private function addDialog($dialogId)
+    {
         $this->beginWidget('zii.widgets.jui.CJuiDialog', array(
-            'id' => 'country-dialog',
+            'id' => $dialogId,
             'options' => array(
                 'title' => 'Add Country',
                 'autoOpen' => false,
@@ -41,21 +53,25 @@ class ESensorarioDropdown extends ESConfig
         ));
         echo 'ciao mondo';
         $this->endWidget('zii.widgets.jui.CJuiDialog');
+    }
+
+    public function run()
+    {
+        parent::run();
 
         /* Three dropdowns */
         echo '
         <div  class="box">
-            <div id="country-box">
-                <span id="' . $this->config['Country']['id'] . '"></span>
-                <span id="country-plus"> [' . 
-                    CHtml::link('+', '#', array(
-                        'onclick' => '$("#country-dialog").dialog("open"); 
-                            return false;',
-                    )) . ']
-                </span>
-            </div>
+        
+            <span id="' . $this->config['Country']['id'] . '"></span>
+            ' . ($this->plusButton('country-dialog', true)) . '
+            
             <span id="' . $this->config['State']['id'] . '"></span>
+            ' . ($this->plusButton('state-dialog', false)) . '
+            
             <span id="' . $this->config['City']['id'] . '"></span>
+            ' . ($this->plusButton('city-dialog', false)) . '
+            
         </div>';
     }
 
