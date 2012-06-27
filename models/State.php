@@ -94,7 +94,7 @@ class State extends CActiveRecord
                 ));
     }
 
-    public static function getStates($countryId, $arrayStates = array())
+    public static function getStates($countryId, $arrayStates = array(), $label)
     {
         $states = State::model()->findAll(array(
             'order' => 'name',
@@ -103,7 +103,7 @@ class State extends CActiveRecord
                 'country_id' => $countryId
             )
                 ));
-        $arrayStates[0] = 'Select a state';
+        $arrayStates[0] = $label;
         foreach ($states as $state) {
             $arrayStates[$state->id] = $state->name;
         }

@@ -88,12 +88,12 @@ class Country extends CActiveRecord
                 ));
     }
 
-    public static function getCountries($arrayOfCountries = array())
+    public static function getCountries($arrayOfCountries = array(), $label)
     {
         $countries = Country::model()->findAll(array(
             'order' => 'name'
         ));
-        $arrayOfCountries[0] = 'Select a country';
+        $arrayOfCountries[0] = $label;
         foreach ($countries as $country) {
             $arrayOfCountries[$country->id] = $country->name;
         }

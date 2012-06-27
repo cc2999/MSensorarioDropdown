@@ -92,7 +92,7 @@ class City extends CActiveRecord
                 ));
     }
 
-    public static function getCities($stateId, $arrayOfCities = array())
+    public static function getCities($stateId, $arrayOfCities = array(), $label)
     {
         $cities = City::model()->findAll(array(
             'order' => 'name',
@@ -101,7 +101,7 @@ class City extends CActiveRecord
                 ':state_id' => $stateId
             )
                 ));
-        $arrayOfCities[0] = 'Select a City';
+        $arrayOfCities[0] = $label;
         foreach ($cities as $city) {
             $arrayOfCities[$city->id] = $city->name;
         }
