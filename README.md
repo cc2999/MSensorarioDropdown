@@ -149,6 +149,7 @@ Bugfixes:
 *   #11: Fixed README.md
 
 Enhancement:
+*    #3: Modal window for adding new items
 *    #8: Convert data samples en english
 *    #2: Dynamic models
 
