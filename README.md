@@ -144,15 +144,15 @@ Sample data
 ## 1.2 (Jun 27, 2012)
 
 Bugfixes:
-    #7: Label configurable in config file
-    #5: Changing Country, city is not resetted
-   #11: Fixed README.md
+*    #7: Label configurable in config file
+*    #5: Changing Country, city is not resetted
+*   #11: Fixed README.md
 
 Enhancement:
-    #8: Convert data samples en english
-    #2: Dynamic models
+*    #8: Convert data samples en english
+*    #2: Dynamic models
 
 ## 1.1 (Jun 23, 2012)
 
 Bugfixes:
-    #1: Enable also non "path" style url
+*    #1: Enable also non "path" style url
