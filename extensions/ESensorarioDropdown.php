@@ -15,17 +15,19 @@ class ESensorarioDropdown extends ESConfig
 
         $this->config = ESensorarioDropdown::getConfig($this->configOption);
 
-        Yii::app()->getClientScript()->registerScript('drop', '$.ajax({
-            url: "' . (Yii::app()->createUrl('MSensorarioDropdown/default/country', array(
-                    'country' => $this->config['Country']['id'],
-                    'state' => $this->config['State']['id'],
-                    'city' => $this->config['City']['id'],
-                    'configuration' => $this->configOption,
-                ))) . '",
-            success: function (data) {
-                $("#' . $this->config['Country']['id'] . '").html(data);
-            }
-        })');
+        Yii::app()->getClientScript()->registerScript('drop', 'function initCountry() {
+            $.ajax({
+                url: "' . (Yii::app()->createUrl('MSensorarioDropdown/default/country', array(
+                        'country' => $this->config['Country']['id'],
+                        'state' => $this->config['State']['id'],
+                        'city' => $this->config['City']['id'],
+                        'configuration' => $this->configOption,
+                    ))) . '",
+                success: function (data) {
+                    $("#' . $this->config['Country']['id'] . '").html(data);
+                }
+            });
+        };initCountry();');
     }
 
     private function plusButton($dialogId, $model, $visible = false)
@@ -70,6 +72,7 @@ class ESensorarioDropdown extends ESConfig
                             url: "'.Yii::app()->createUrl('MSensorarioDropdown/' . ($dialogId) . '/list').'",
                             success: function (data) {
                                 $("#MSensorarioDropdown_'. $dialogId .'_list").html(data);
+                                initCountry();
                             }
                         });
                     }'
@@ -102,10 +105,10 @@ class ESensorarioDropdown extends ESConfig
             ' . ($this->plusButton('countryDialog', new Country, true)) . '
             
             <span id="' . $this->config['State']['id'] . '"></span>
-            ' . ($this->plusButton('state-dialog', new State, false)) . '
+            ' . ($this->plusButton('stateDialog', new State, false)) . '
             
             <span id="' . $this->config['City']['id'] . '"></span>
-            ' . ($this->plusButton('city-dialog', new City, false)) . '
+            ' . ($this->plusButton('cityDialog', new City, false)) . '
             
         </div>';
     }
