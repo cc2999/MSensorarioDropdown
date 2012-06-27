@@ -43,9 +43,9 @@ here the content:
 
     return array(
         'Country' => array(
-            'id' => 'stati',
-            'name' => 'Stati',
-            'model' => 'Stato::getStati();',
+            'id' => 'country',
+            'name' => 'Countries',
+            'model' => 'Country::getCountry();',
         ),
         'State' => array(
             'id' => 'regioni',
@@ -87,55 +87,55 @@ Usage
 Sample Schema
 =============
 
-    CREATE TABLE IF NOT EXISTS `comune` (
+    CREATE TABLE IF NOT EXISTS `city` (
         `id` int(11) NOT NULL AUTO_INCREMENT,
-        `nome` varchar(50) NOT NULL,
-        `regione_id` int(11) NOT NULL,
+        `name` varchar(50) NOT NULL,
+        `state_id` int(11) NOT NULL,
         PRIMARY KEY (`id`),
-        KEY `regione_id` (`regione_id`)
+        KEY `state_id` (`state_id`)
     );
 
-    CREATE TABLE IF NOT EXISTS `regione` (
+    CREATE TABLE IF NOT EXISTS `state` (
         `id` int(11) NOT NULL AUTO_INCREMENT,
-        `nome` varchar(50) NOT NULL,
-        `stato_id` int(11) NOT NULL,
+        `name` varchar(50) NOT NULL,
+        `country_id` int(11) NOT NULL,
         PRIMARY KEY (`id`),
-        KEY `stato_id` (`stato_id`)
+        KEY `country_id` (`country_id`)
     );
 
-    CREATE TABLE IF NOT EXISTS `stato` (
+    CREATE TABLE IF NOT EXISTS `country` (
         `id` int(11) NOT NULL AUTO_INCREMENT,
-        `nome` varchar(50) NOT NULL,
+        `name` varchar(50) NOT NULL,
         PRIMARY KEY (`id`)
     );
 
-    ALTER TABLE `comune`
-        ADD CONSTRAINT `comune_ibfk_1`
-        FOREIGN KEY (`regione_id`)
-        REFERENCES `regione` (`id`);
+    ALTER TABLE `city`
+        ADD CONSTRAINT `city_ibfk_1`
+        FOREIGN KEY (`state_id`)
+        REFERENCES `state` (`id`);
 
-    ALTER TABLE `regione`
-        ADD CONSTRAINT `regione_ibfk_1` 
-        FOREIGN KEY (`stato_id`) 
-        REFERENCES `stato` (`id`);
+    ALTER TABLE `state`
+        ADD CONSTRAINT `state_ibfk_1` 
+        FOREIGN KEY (`country_id`) 
+        REFERENCES `country` (`id`);
 
 Sample data
 ===========
 
-    INSERT INTO `stato` (`id`, `nome`) VALUES
-        (1, 'Italia'),
-        (2, 'Francia'),
-        (3, 'Germania'),
-        (4, 'Spagna'),
-        (5, 'Inghilterrra'),
-        (6, 'Svezia');
+    INSERT INTO `country` (`id`, `name`) VALUES
+        (1, 'Italy'),
+        (2, 'Spain'),
+        (3, 'Germany'),
+        (4, 'England'),
+        (5, 'Swiss'),
+        (6, 'Norway');
 
-    INSERT INTO `regione` (`id`, `nome`, `stato_id`) VALUES
+    INSERT INTO `state` (`id`, `name`, `country_id`) VALUES
         (1, 'Emilia-Romagna', 1),
         (2, 'Molise', 1),
         (3, 'Lazio', 1);
 
-    INSERT INTO `comune` (`id`, `nome`, `regione_id`) VALUES
+    INSERT INTO `city` (`id`, `name`, `state_id`) VALUES
         (1, 'Cesena', 1),
         (2, 'Bologna', 1),
         (3, 'Parma', 1);

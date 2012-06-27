@@ -20,12 +20,14 @@ class SGenericDropDownConfig extends ESConfig
         );
     }
 
-    public static function State($id = null, $city = 'city', $model = array(), $configuration)
+    public static function State($id = null, $city = 'city', $model = array(), $configuration = array())
     {
+        $id = $id;
+        
         $config = SGenericDropDownConfig::getConfig($configuration);
-
-        eval('$model = ' . $config['State']['model']);
-
+        
+        eval('$model = ' . $config['State']['model'] . ';');
+        
         return array(
             'name' => $config['State']['name'],
             'model' => $model,

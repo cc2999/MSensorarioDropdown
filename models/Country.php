@@ -1,23 +1,21 @@
 <?php
 
 /**
- * This is the model class for table "regione".
+ * This is the model class for table "country".
  *
- * The followings are the available columns in table 'regione':
+ * The followings are the available columns in table 'country':
  * @property integer $id
  * @property string $nome
- * @property integer $stato_id
  *
  * The followings are the available model relations:
- * @property Comune[] $comunes
- * @property Stato $stato
+ * @property Regione[] $regiones
  */
-class Regione extends CActiveRecord
+class Country extends CActiveRecord
 {
     /**
      * Returns the static model of the specified AR class.
      * @param string $className active record class name.
-     * @return Regione the static model class
+     * @return Country the static model class
      */
     public static function model($className = __CLASS__)
     {
@@ -29,7 +27,7 @@ class Regione extends CActiveRecord
      */
     public function tableName()
     {
-        return 'regione';
+        return 'country';
     }
 
     /**
@@ -40,12 +38,11 @@ class Regione extends CActiveRecord
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('nome, stato_id', 'required'),
-            array('stato_id', 'numerical', 'integerOnly' => true),
-            array('nome', 'length', 'max' => 50),
+            array('name', 'required'),
+            array('name', 'length', 'max' => 50),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
-            array('id, nome, stato_id', 'safe', 'on' => 'search'),
+            array('id, name', 'safe', 'on' => 'search'),
         );
     }
 
@@ -57,8 +54,7 @@ class Regione extends CActiveRecord
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
-            'comunes' => array(self::HAS_MANY, 'Comune', 'regione_id'),
-            'stato' => array(self::BELONGS_TO, 'Stato', 'stato_id'),
+            'regiones' => array(self::HAS_MANY, 'Regione', 'country_id'),
         );
     }
 
@@ -69,8 +65,7 @@ class Regione extends CActiveRecord
     {
         return array(
             'id' => 'ID',
-            'nome' => 'Nome',
-            'stato_id' => 'Stato',
+            'name' => 'Name',
         );
     }
 
@@ -86,28 +81,23 @@ class Regione extends CActiveRecord
         $criteria = new CDbCriteria;
 
         $criteria->compare('id', $this->id);
-        $criteria->compare('nome', $this->nome, true);
-        $criteria->compare('stato_id', $this->stato_id);
+        $criteria->compare('name', $this->nome, true);
 
         return new CActiveDataProvider($this, array(
                     'criteria' => $criteria,
                 ));
     }
 
-    public static function getRegione($stato_id, $arrayRegioni = array())
+    public static function getCountries($arrayOfCountries = array())
     {
-        $regioni = Regione::model()->findAll(array(
-            'order' => 'nome',
-            'condition' => 'stato_id=:stato_id',
-            'params' => array(
-                'stato_id' => $stato_id
-            )
-                ));
-        $arrayRegioni[0] = 'Seleziona una regione';
-        foreach ($regioni as $regione) {
-            $arrayRegioni[$regione->id] = $regione->nome;
+        $countries = Country::model()->findAll(array(
+            'order' => 'name'
+        ));
+        $arrayOfCountries[0] = 'Select a country';
+        foreach ($countries as $country) {
+            $arrayOfCountries[$country->id] = $country->name;
         }
-        return $arrayRegioni;
+        return $arrayOfCountries;
     }
 
 }

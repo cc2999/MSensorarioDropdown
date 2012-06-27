@@ -3,22 +3,23 @@
 return array(
     'defaultConfiguration' => 'default',
     'configurations' => array(
-        'default' => array('Country' => array(
-                'id' => 'stati',
-                'name' => 'Stati',
-                'model' => 'Stato::getStati();',
+        'default' => array(
+            'Country' => array(
+                'id' => 'country',
+                'name' => 'Countries',
+                'model' => 'Country::getCountries();',
             ),
             'State' => array(
-                'id' => 'regioni',
-                'name' => 'Regioni',
-                'model' => 'Regione::getRegione($id);',
-                'message' => 'Questa regione non ha comuni',
+                'id' => 'state',
+                'name' => 'States',
+                'model' => 'State::getStates($id);',
+                'message' => 'This country has no states',
             ),
             'City' => array(
-                'id' => 'comuni',
-                'name' => 'Comuni',
-                'model' => 'Comune::getComune($id);',
-                'message' => 'Questa regione non ha comuni',
+                'id' => 'city',
+                'name' => 'Cities',
+                'model' => 'City::getCities($id);',
+                'message' => 'This state has no cities',
             ),
         ),
     ),
