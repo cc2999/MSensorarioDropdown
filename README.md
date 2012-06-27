@@ -39,25 +39,28 @@ To configure this module, you need to update this config file:
 
 here the content:
 
-    <?php
-
     return array(
-        'Country' => array(
-            'id' => 'country',
-            'name' => 'Countries',
-            'model' => 'Country::getCountry();',
-        ),
-        'State' => array(
-            'id' => 'regioni',
-            'name' => 'Regioni',
-            'model' => 'Regione::getRegione($id);',
-            'message' => 'Questa regione non ha comuni',
-        ),
-        'City' => array(
-            'id' => 'comuni',
-            'name' => 'Comuni',
-            'model' => 'Comune::getComune($id);',
-            'message' => 'Questa regione non ha comuni',
+        'defaultConfiguration' => 'default',
+        'configurations' => array(
+            'default' => array(
+                'Country' => array(
+                    'id' => 'country',
+                    'name' => 'Countries',
+                    'model' => 'Country::getCountries();',
+                ),
+                'State' => array(
+                    'id' => 'state',
+                    'name' => 'States',
+                    'model' => 'State::getStates($id);',
+                    'message' => 'This country has no states',
+                ),
+                'City' => array(
+                    'id' => 'city',
+                    'name' => 'Cities',
+                    'model' => 'City::getCities($id);',
+                    'message' => 'This state has no cities',
+                ),
+            ),
         ),
     );
 
@@ -74,15 +77,9 @@ once selected a *state*. Or there are no *state once selected a *country*.
 Usage
 =====
 
-## from (Jun 25, 2012)
-
     $this->widget('MSensorarioDropdown.extensions.ESensorarioDropdown', array(
         'configOption' => 'default'
     ));
-
-## from 1.1 (Jun 23, 2012)
-
-    <?php $this->widget('MSensorarioDropdown.extensions.ESensorarioDropdown'); ?>
 
 Sample Schema
 =============
@@ -141,15 +138,17 @@ Sample data
         (3, 'Parma', 1);
 
 	
-## 1.2 (Jun 23, 2012)
+## 1.2 (Jun 27, 2012)
 
 Bugfixes:
-    #5 Changing Country, city is not resetted
+    #5: Changing Country, city is not resetted
+   #11: Fixed README.md
 
 Enhancement:
-    #2 Dynamic models
+    #8: Convert data samples en english
+    #2: Dynamic models
 
 ## 1.1 (Jun 23, 2012)
 
 Bugfixes:
-    #1 Enable also non "path" style url
+    #1: Enable also non "path" style url
