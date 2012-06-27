@@ -29,9 +29,31 @@ class ESensorarioDropdown extends ESConfig
     public function run()
     {
         parent::run();
+
+        /* Modal window */
+        $this->beginWidget('zii.widgets.jui.CJuiDialog', array(
+            'id' => 'country-dialog',
+            'options' => array(
+                'title' => 'Add Country',
+                'autoOpen' => false,
+                'modal' => true,
+            ),
+        ));
+        echo 'ciao mondo';
+        $this->endWidget('zii.widgets.jui.CJuiDialog');
+
+        /* Three dropdowns */
         echo '
         <div  class="box">
-            <span id="' . $this->config['Country']['id'] . '"></span>
+            <div id="country-box">
+                <span id="' . $this->config['Country']['id'] . '"></span>
+                <span id="country-plus"> [' . 
+                    CHtml::link('+', '#', array(
+                        'onclick' => '$("#country-dialog").dialog("open"); 
+                            return false;',
+                    )) . ']
+                </span>
+            </div>
             <span id="' . $this->config['State']['id'] . '"></span>
             <span id="' . $this->config['City']['id'] . '"></span>
         </div>';
