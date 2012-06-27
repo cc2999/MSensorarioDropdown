@@ -19,11 +19,31 @@ class SGenericDropDown
                     '/fk/' :
                     '&fk=';
 
+            $config = SGenericDropDownConfig::getConfig($configuration);
+            
             $params['htmlOptions'] = array('onchange' => '
-                $("#' . $city . '").html("");
+                $("#' . $city . '").fadeOut().html("").fadeIn();
+                var oggetto = $(this).val();
                 $.ajax({
                     url: "' . $url . $fk . '"+this.value,
                     success: function (data) {
+                            
+                        var json = '.(json_encode($config)).';
+
+                        if("'.$params['id'].'" === "country") {
+                            $("#button-plus-stateDialog").fadeIn();
+                        }
+
+                        if("'.$params['id'].'" === "state") {
+                            $("#country_id").val(oggetto);
+                            $("#button-plus-stateDialog").fadeIn();
+                        }
+
+                        if("'.$params['id'].'" === "city") {
+                            $("#state_id").val(oggetto);
+                            $("#button-plus-cityDialog").fadeIn();
+                        }
+                            
                         $("#' . $params['id'] . '").html(data);
                     }
                 })');

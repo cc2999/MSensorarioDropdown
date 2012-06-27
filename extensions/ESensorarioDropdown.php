@@ -16,15 +16,21 @@ class ESensorarioDropdown extends ESConfig
         $this->config = ESensorarioDropdown::getConfig($this->configOption);
 
         Yii::app()->getClientScript()->registerScript('drop', 'function initCountry() {
+            
+            $("#button-plus-stateDialog").fadeOut();
+            $("#button-plus-cityDialog").fadeOut();
+
             $.ajax({
                 url: "' . (Yii::app()->createUrl('MSensorarioDropdown/default/country', array(
-                        'country' => $this->config['Country']['id'],
-                        'state' => $this->config['State']['id'],
-                        'city' => $this->config['City']['id'],
-                        'configuration' => $this->configOption,
-                    ))) . '",
+                    'country' => $this->config['Country']['id'],
+                    'state' => $this->config['State']['id'],
+                    'city' => $this->config['City']['id'],
+                    'configuration' => $this->configOption,
+                ))) . '",
                 success: function (data) {
                     $("#' . $this->config['Country']['id'] . '").html(data);
+                    $("#' . $this->config['State']['id'] . '").html("' . ($this->config['State']['label']) . '");
+                    $("#' . $this->config['City']['id'] . '").html("' . ($this->config['City']['label']) . '");
                 }
             });
         };initCountry();');
@@ -35,8 +41,8 @@ class ESensorarioDropdown extends ESConfig
         $this->addDialog($dialogId, $model);
 
         return '
-            <span class="plus-box" style="visibility: ' . ($visible === true ? 'visible' : 'hidden') . ';">
-                <span class="button-plus"> [' .
+            <span class="plus-box">
+                <span class="button-plus" id="button-plus-' . ($dialogId) . '"> [' .
                 CHtml::link('+', '#', array(
                     'onclick' => '$("#' . ($dialogId) . '").dialog("open"); 
                                     return false;',
@@ -63,23 +69,34 @@ class ESensorarioDropdown extends ESConfig
                 <?php echo CHtml::activeLabel($model, 'name'); ?>
                 <?php echo CHtml::activeTextField($model, 'name') ?>
             </div>
+            
+            <?php if ($dialogId === "stateDialog"): ?>
+                <input type="text" id="country_id" name="State[country_id]" />
+            <?php endif; ?>
+                
+            <?php if ($dialogId === "cityDialog"): ?>
+                <input type="text" id="state_id" name="City[state_id]" />
+            <?php endif; ?>
+                
             <div class="row submit">
                 <?php $url = Yii::app()->createUrl('MSensorarioDropdown/' . ($dialogId) . '/add'); ?>
                 <?php
                 echo CHtml::ajaxSubmitButton('Save', $url, array(
-                'success' => 'function(){
+                    'success' => 'function(){
                         $.ajax({
-                            url: "'.Yii::app()->createUrl('MSensorarioDropdown/' . ($dialogId) . '/list').'",
+                            url: "' . Yii::app()->createUrl('MSensorarioDropdown/' . ($dialogId) . '/list') . '",
                             success: function (data) {
-                                $("#MSensorarioDropdown_'. $dialogId .'_list").html(data);
-                                initCountry();
+                                $("#MSensorarioDropdown_' . $dialogId . '_list").html(data);
+                                ' . (($dialogId === 'countryDialog') ? 'initCountry();' : '') . '
+                                //' . (($dialogId === 'stateDialog') ? 'initState();' : '') . '
+                                //' . (($dialogId === 'cityDialog') ? 'initCity();' : '') . '
                             }
                         });
                     }'
                 ));
                 ?>
             </div>
-                    <?php echo CHtml::endForm(); ?>
+            <?php echo CHtml::endForm(); ?>
             <div id="MSensorarioDropdown_<?php echo $dialogId; ?>_list">
                 <ul>
                     <?php $criteria = array('order' => 'name'); ?>
