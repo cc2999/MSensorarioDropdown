@@ -1,6 +1,8 @@
 <?php
-
 require dirname(__FILE__) . '/../helpers/ESConfig.php';
+require dirname(__FILE__) . '/../models/Country.php';
+require dirname(__FILE__) . '/../models/State.php';
+require dirname(__FILE__) . '/../models/City.php';
 
 class ESensorarioDropdown extends ESConfig
 {
@@ -26,32 +28,65 @@ class ESensorarioDropdown extends ESConfig
         })');
     }
 
-    private function plusButton($dialogId, $visible = false)
+    private function plusButton($dialogId, $model, $visible = false)
     {
-        $this->addDialog($dialogId);
+        $this->addDialog($dialogId, $model);
 
         return '
-            <span id="country-plus-box" style="visibility: '.($visible === true ? 'visible' : 'hidden').';">
-                <span id="country-plus"> [' .
-                    CHtml::link('+', '#', array(
-                        'onclick' => '$("#country-dialog").dialog("open"); 
+            <span class="plus-box" style="visibility: ' . ($visible === true ? 'visible' : 'hidden') . ';">
+                <span class="button-plus"> [' .
+                CHtml::link('+', '#', array(
+                    'onclick' => '$("#' . ($dialogId) . '").dialog("open"); 
                                     return false;',
-                    )) . ']
+                )) . ']
                 </span>
             </span>';
     }
 
-    private function addDialog($dialogId)
+    private function addDialog($dialogId, $model)
     {
         $this->beginWidget('zii.widgets.jui.CJuiDialog', array(
             'id' => $dialogId,
             'options' => array(
-                'title' => 'Add Country',
+                'title' => 'Add Item',
                 'autoOpen' => false,
                 'modal' => true,
             ),
         ));
-        echo 'ciao mondo';
+        ?>
+        <div class="form">
+            <?php echo CHtml::beginForm(); ?>
+            <?php echo CHtml::errorSummary($model); ?>
+            <div class="row">
+                <?php echo CHtml::activeLabel($model, 'name'); ?>
+                <?php echo CHtml::activeTextField($model, 'name') ?>
+            </div>
+            <div class="row submit">
+                <?php $url = Yii::app()->createUrl('MSensorarioDropdown/' . ($dialogId) . '/add'); ?>
+                <?php
+                echo CHtml::ajaxSubmitButton('Save', $url, array(
+                'success' => 'function(){
+                        $.ajax({
+                            url: "'.Yii::app()->createUrl('MSensorarioDropdown/' . ($dialogId) . '/list').'",
+                            success: function (data) {
+                                $("#MSensorarioDropdown_'. $dialogId .'_list").html(data);
+                            }
+                        });
+                    }'
+                ));
+                ?>
+            </div>
+                    <?php echo CHtml::endForm(); ?>
+            <div id="MSensorarioDropdown_<?php echo $dialogId; ?>_list">
+                <ul>
+                    <?php $criteria = array('order' => 'name'); ?>
+                    <?php foreach ($model->findAll($criteria) as $item) : ?>
+                        <li><?php echo $item['name']; ?></li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+        </div>
+        <?php
         $this->endWidget('zii.widgets.jui.CJuiDialog');
     }
 
@@ -64,13 +99,13 @@ class ESensorarioDropdown extends ESConfig
         <div  class="box">
         
             <span id="' . $this->config['Country']['id'] . '"></span>
-            ' . ($this->plusButton('country-dialog', true)) . '
+            ' . ($this->plusButton('countryDialog', new Country, true)) . '
             
             <span id="' . $this->config['State']['id'] . '"></span>
-            ' . ($this->plusButton('state-dialog', false)) . '
+            ' . ($this->plusButton('state-dialog', new State, false)) . '
             
             <span id="' . $this->config['City']['id'] . '"></span>
-            ' . ($this->plusButton('city-dialog', false)) . '
+            ' . ($this->plusButton('city-dialog', new City, false)) . '
             
         </div>';
     }
